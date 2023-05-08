@@ -1,0 +1,40 @@
+Q-1. Write an SQL query to print details of the Workers who have joined in Feb’2014.
+ans- select * from worker where year(joining_date) = 2014 and month(JOINING_DATE) = 2
+
+Q-2. Write an SQL query to fetch duplicate records having matching data in some fields of
+a table.
+SELECT 
+    column1, 
+    column2,  
+    ...
+FROM
+    table_name
+GROUP BY 
+    column1, 
+    column2, ...
+HAVING 
+       (COUNT(column1) > 1) AND 
+       (COUNT(column2) > 1) AND 
+
+Q-3. How to remove duplicate rows from Employees table.
+WITH cte AS (
+    SELECT 
+        contact_id, 
+        first_name, 
+        last_name, 
+        email, 
+        ROW_NUMBER() OVER (
+            PARTITION BY 
+                first_name, 
+                last_name, 
+                email
+            ORDER BY 
+                first_name, 
+                last_name, 
+                email
+        ) row_num
+     FROM 
+        sales.contacts
+)
+DELETE FROM cte
+WHERE row_num > 1;
