@@ -1,0 +1,17 @@
+Q-15. Write an SQL query to fetch intersecting records of two tables.
+
+SELECT column1, column2,…, columnN
+FROM table1, table2,…, tableN
+INTERSECT
+SELECT column1, column2,…, columnN
+FROM table1, table2,…, tableN
+
+
+Q-16. Write an SQL query to show records from one table that another table does not
+have.
+SELECT emp_id,emp_name  
+FROM employee_details
+WHERE NOT EXISTS
+(SELECT *  
+   FROM  employee_resigned
+   WHERE employee_details.emp_id = employee_resigned.emp_id);
