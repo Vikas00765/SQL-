@@ -1,0 +1,18 @@
+Q-19. Write an SQL query to determine the 5th highest salary without using TOP or limit
+method.
+SELECT * FROM (  
+SELECT ROW_NUMBER() OVER (ORDER BY SALARY DESC) AS rownumber,Salary  
+FROM Employee )  
+AS foo  
+WHERE rownumber = n  
+
+Q-20. Write an SQL query to fetch the list of employees with the same salary.
+
+SELECT Name
+FROM table1 
+WHERE Salary IN (
+    SELECT Salary
+    FROM table1
+    GROUP BY Salary
+    HAVING COUNT(*) > 1
+)
